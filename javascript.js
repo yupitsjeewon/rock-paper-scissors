@@ -1,80 +1,93 @@
-console.log("hello");
+const computerChoiceDisplay = document.querySelector(".computer-choice");
+const userChoiceDisplay = document.querySelector(".user-choice");
+const rockButton = document.querySelector(".rock-button");
+const paperButton = document.querySelector(".paper-button");
+const scissorsButton = document.querySelector(".scissors-button");
+const resetBUtton = document.querySelector(".reset-button");
+
+const computerScoreDisplay = document.querySelector(".computer-score");
+const userScoreDisplay = document.querySelector(".user-score");
+
+let userScore = 0;
+let computerScore = 0;
+
+function displayScore() {
+    computerScoreDisplay.textContent = computerScore;
+    userScoreDisplay.textContent = userScore;
+}
+
+
+
 function getComputerChoice() {
     let val = 3 * Math.random();
     if (val >= 2) {
-        return "rock";
+        return "Rock"
     }
     if (val >= 1) {
-        return "paper";
+        return "Paper";
     }
     else {
-        return "scissors";
+        return "Scissors";
     }
 }
 
-function getHumanChoice() {
-    return prompt("Choose rock, paper, or scissors");
-}
+rockButton.addEventListener("click", function() {
+    displayResults("Rock");
+});
+paperButton.addEventListener("click", function() {
+    displayResults("Paper");
+});
+scissorsButton.addEventListener("click", function() {
+    displayResults("Scissors");
+});
+resetBUtton.addEventListener("click", reset);
 
-let computerScore = 0;
-let humanScore = 0;
-let computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
 
-function playRound(humanChoice, computerChoice) {
+function displayResults(userChoice) {
+    let computerChoice = getComputerChoice();
+    computerChoiceDisplay.textContent = computerChoice;
+    userChoiceDisplay.textContent = userChoice;
 
-    humanChoice = humanChoice.toLowerCase();
-    let tie = "It's a tie!"
-    if (humanChoice == "rock") {
-        if (computerChoice == "rock")  {
-            return tie;
-        }
-        else if (computerChoice == "paper") {
+    if (userChoice == "Rock") {
+        if (computerChoice == "Paper") {
             computerScore ++;
-            return "You lost to paper!";
         }
-        else if (computerChoice == "scissors") {
-            humanScore ++;
-            return "You beat scissors!";
+        else if (computerChoice == "Scissors") {
+            userScore ++;
         }
     }
 
-    if (humanChoice == "paper") {
-        if (computerChoice == "rock")  {
-            humanScore ++;
-            return "You beat rock!";
+    if (userChoice == "Paper") {
+        if (computerChoice == "Rock")  {
+            userScore ++;
         }
-        else if (computerChoice == "paper") {
-            return tie;
-        }
-        else if (computerChoice == "scissors") {
+        else if (computerChoice == "Scissors") {
             computerScore ++;
-            return "You lost to scissors!";
         }
     }
 
-    if (humanChoice == "scissors") {
-        if (computerChoice == "rock")  {
+    if (userChoice == "Scissors") {
+        if (computerChoice == "Rock")  {
             computerScore ++;
-            return "You lost to rock!";
         }
-        else if (computerChoice == "paper") {
-            humanScore ++;
-            return "You beat to paper!";
-        }
-        else if (computerChoice == "scissors") {
-            return tie;
+        else if (computerChoice == "Paper") {
+            userScore ++;
         }
     }
-
+    displayScore();
 }
 
-for (let i = 0; i < 5; i++) {
-    humanChoice = getHumanChoice();
-    computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
+function reset() {
+    computerChoiceDisplay.textContent = "";
+    userChoiceDisplay.textContent = "";
+    userScoreDisplay.textContent = "";
+    computerScoreDisplay.textContent = "";
 }
 
-console.log("Your score: " + humanScore);
-console.log("Computer score: " + computerScore);
+
+
+
+
+
+
 
