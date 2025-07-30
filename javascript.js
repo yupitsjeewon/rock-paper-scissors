@@ -82,6 +82,8 @@ function reset() {
     userChoiceDisplay.textContent = "";
     userScoreDisplay.textContent = "";
     computerScoreDisplay.textContent = "";
+    userScore = 0;
+    computerScore = 0;
 }
 
 
